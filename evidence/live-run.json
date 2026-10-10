@@ -1,0 +1,140 @@
+{
+  "capsuleId": "LIFEBOAT-1791674783",
+  "contract": "0xC8f3D140b023415bf4874DC09553F7Ebc0Ed6f3c",
+  "transactions": {
+    "launch": "0x45632444d5b4a62701e1790a5a17d2fc09605127d25e46be6e4d65baa6953726",
+    "inspect": "0x0450943a10e57d499bc6cfb2ca6e19cc51d3eeac0858bac6fdda9c9c9e538f5b",
+    "unauthorizedSeal": "0x132962185a1f0d9d1b0d0d04ffdcbd77c4479268753b94f4449c71a464869c2b",
+    "seal": "0xffdc696b618f6ebdf380081c9331b2e235fd597ab269106665cbf5c338be0c1a"
+  },
+  "launched": {
+    "digests": [
+      "1a5cee59326cf9af09bc2c953d8235cbf0587fc6cdb4bec0ba11f7b99365fd71",
+      "ae930b88ed7cf3e3eb9551b46261f622f92ba2f4aa1101dcd7be5f80b8605cce",
+      "5bdbdf6a65e2962ba83b931bf8c2b0bae85051c53bbd24d4903fa0528d190482",
+      "02f3b81d859cb67593aecfe63a4534351cd65130918db9850ac23fea0b429eec"
+    ],
+    "id": "LIFEBOAT-1791674783",
+    "label": "Lantern Index preservation set",
+    "mirror_a": {},
+    "mirror_b": {},
+    "owner": "0xAD049E0Edc298C97552eD60071a35bfc60181FD4",
+    "reason_codes": [],
+    "sources": [
+      {
+        "role": "origin",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/origin.txt"
+      },
+      {
+        "role": "mirror_a",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-a.txt"
+      },
+      {
+        "role": "mirror_b",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-b.txt"
+      },
+      {
+        "role": "policy",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/policy.txt"
+      }
+    ],
+    "state": "AFLOAT",
+    "verdict": ""
+  },
+  "inspected": {
+    "digests": [
+      "1a5cee59326cf9af09bc2c953d8235cbf0587fc6cdb4bec0ba11f7b99365fd71",
+      "ae930b88ed7cf3e3eb9551b46261f622f92ba2f4aa1101dcd7be5f80b8605cce",
+      "5bdbdf6a65e2962ba83b931bf8c2b0bae85051c53bbd24d4903fa0528d190482",
+      "02f3b81d859cb67593aecfe63a4534351cd65130918db9850ac23fea0b429eec"
+    ],
+    "id": "LIFEBOAT-1791674783",
+    "label": "Lantern Index preservation set",
+    "mirror_a": {
+      "content": true,
+      "context": true,
+      "provenance": false
+    },
+    "mirror_b": {
+      "content": true,
+      "context": true,
+      "provenance": true
+    },
+    "owner": "0xAD049E0Edc298C97552eD60071a35bfc60181FD4",
+    "reason_codes": [
+      "PROVENANCE_MISSING"
+    ],
+    "sources": [
+      {
+        "role": "origin",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/origin.txt"
+      },
+      {
+        "role": "mirror_a",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-a.txt"
+      },
+      {
+        "role": "mirror_b",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-b.txt"
+      },
+      {
+        "role": "policy",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/policy.txt"
+      }
+    ],
+    "state": "INSPECTED",
+    "verdict": "PARTIAL"
+  },
+  "final": {
+    "digests": [
+      "1a5cee59326cf9af09bc2c953d8235cbf0587fc6cdb4bec0ba11f7b99365fd71",
+      "ae930b88ed7cf3e3eb9551b46261f622f92ba2f4aa1101dcd7be5f80b8605cce",
+      "5bdbdf6a65e2962ba83b931bf8c2b0bae85051c53bbd24d4903fa0528d190482",
+      "02f3b81d859cb67593aecfe63a4534351cd65130918db9850ac23fea0b429eec"
+    ],
+    "id": "LIFEBOAT-1791674783",
+    "label": "Lantern Index preservation set",
+    "mirror_a": {
+      "content": true,
+      "context": true,
+      "provenance": false
+    },
+    "mirror_b": {
+      "content": true,
+      "context": true,
+      "provenance": true
+    },
+    "owner": "0xAD049E0Edc298C97552eD60071a35bfc60181FD4",
+    "reason_codes": [
+      "PROVENANCE_MISSING"
+    ],
+    "sources": [
+      {
+        "role": "origin",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/origin.txt"
+      },
+      {
+        "role": "mirror_a",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-a.txt"
+      },
+      {
+        "role": "mirror_b",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-b.txt"
+      },
+      {
+        "role": "policy",
+        "url": "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/policy.txt"
+      }
+    ],
+    "state": "SEALED",
+    "verdict": "PARTIAL"
+  },
+  "unauthorizedSeal": {
+    "consensus": "MAJORITY_AGREE",
+    "execution": [
+      "ERROR",
+      "ERROR"
+    ]
+  },
+  "fixtureDisclosure": "Public fixtures demonstrate four-source digest freezing, fidelity consensus, owner-only sealing, and state preservation after an unauthorized call."
+}
