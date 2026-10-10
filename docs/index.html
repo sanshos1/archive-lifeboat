@@ -116,6 +116,9 @@
           monospace;
         white-space: nowrap;
         transition: 0.5s;
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
       }
       .strip:before {
         content: attr(data-no);
@@ -140,6 +143,15 @@
       .film-window.clamped .strip {
         transform: translateX(0);
         box-shadow: 0 7px 20px #786d5720;
+      }
+      .strip.active {
+        background: linear-gradient(
+          90deg,
+          #ffffff35 0 9%,
+          #e15d3540 9% 10%,
+          #ffffffa0 10% 100%
+        );
+        color: var(--orange);
       }
       .loupe {
         position: absolute;
@@ -174,66 +186,54 @@
         bottom: -24px;
         transform: rotate(42deg);
       }
-      .panel {
-        position: fixed;
-        z-index: 9;
-        left: 88px;
-        top: 86px;
-        bottom: auto;
-        width: min(760px, calc(100% - 88px));
-        height: calc(100% - 86px);
-        background: #f7f1e5f5;
-        border-right: 1px solid var(--ink);
-        padding: 38px 54px;
-        transform: translateX(-110%);
-        transition: 0.35s;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-content: start;
-        gap: 12px 24px;
-        overflow: auto;
+      .splicer {
+        position: absolute;
+        z-index: 7;
+        right: 5vw;
+        top: 36px;
+        width: 330px;
+        background: #162526;
+        color: var(--paper);
+        padding: 22px;
+        transform: translateX(120%);
+        transition: transform 0.35s ease;
+        box-shadow: 0 18px 40px #0003;
       }
-      .panel.open {
+      .splicer.open {
         transform: translateX(0);
       }
-      .panel h2 {
-        font:
-          28px Georgia,
-          serif;
-        margin: 0 0 8px;
-        grid-column: 1/-1;
+      .splicer small {
+        color: #c9bfa8;
+        letter-spacing: 0.15em;
       }
-      .field label {
-        display: block;
-        font:
-          9px ui-monospace,
-          monospace;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+      .splicer h2 {
+        margin: 7px 0 18px;
+        font: italic 28px Georgia, serif;
       }
-      .field input {
+      .splicer input {
         width: 100%;
-        padding: 8px 0;
         border: 0;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid #c9bfa8;
         background: transparent;
-        color: var(--ink);
+        color: white;
+        padding: 10px 0;
+        font: 11px ui-monospace, monospace;
       }
-      .actions {
-        grid-column: 1/-1;
-        display: flex;
-        gap: 10px;
-        margin-top: 12px;
+      .splice-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 18px;
       }
-      .actions button {
-        border: 1px solid var(--ink);
+      .splice-actions button {
+        border: 1px solid #c9bfa8;
         background: none;
-        padding: 10px 16px;
+        color: var(--paper);
+        padding: 10px;
       }
-      .actions .primary {
+      .splice-actions .launch {
         background: var(--orange);
         border-color: var(--orange);
-        color: white;
       }
       .seal {
         position: absolute;
@@ -265,14 +265,6 @@
           monospace;
         color: var(--green);
       }
-      .close {
-        position: absolute;
-        right: 22px;
-        top: 18px;
-        border: 0;
-        background: none;
-        font-size: 24px;
-      }
       .toast {
         position: fixed;
         top: 100px;
@@ -291,14 +283,9 @@
         .bench {
           grid-template-columns: 52px 1fr;
         }
-        .panel {
-          left: 52px;
-          width: calc(100% - 52px);
-          padding: 30px 24px;
-          grid-template-columns: 1fr;
-        }
-        .field {
-          grid-column: 1;
+        .splicer {
+          right: 18px;
+          width: min(330px, calc(100% - 36px));
         }
         .loupe {
           left: 24%;
@@ -327,74 +314,39 @@
       </nav>
       <section class="table">
         <div class="registration">
-          <span>ORIGIN · MIRROR A · MIRROR B · POLICY</span
+          <span id="capsuleTag">ORIGIN · MIRROR A · MIRROR B · POLICY</span
           ><span id="state">UNLOADED</span>
         </div>
         <div class="film-window" id="films">
-          <div class="strip s1" data-no="01">
+          <button class="strip s1" data-no="01" data-strip="0">
             ORIGIN / source record / content + context + authorship
-          </div>
-          <div class="strip s2" data-no="02">
+          </button>
+          <button class="strip s2" data-no="02" data-strip="1">
             MIRROR A / first independent preservation copy
-          </div>
-          <div class="strip s3" data-no="03">
+          </button>
+          <button class="strip s3" data-no="03" data-strip="2">
             MIRROR B / second independent preservation copy
-          </div>
-          <div class="strip s4" data-no="04">
+          </button>
+          <button class="strip s4" data-no="04" data-strip="3">
             POLICY / the facets that must survive
-          </div>
+          </button>
           <div class="loupe" id="loupe">
             Move through the four strips.<br />Nothing is assumed preserved.
           </div>
+          <section class="splicer" id="splicer">
+            <small id="editorCount">STRIP 01 / 04</small>
+            <h2 id="editorRole">Origin</h2>
+            <input id="sourceUrl" aria-label="Active source URL" />
+            <div class="splice-actions">
+              <button id="nextStrip">advance film</button>
+              <button class="launch" id="launch">clamp + launch</button>
+            </div>
+          </section>
         </div>
         <div class="status" id="status">READY / LOAD A CAPSULE</div>
         <div class="seal" id="stamp">PRESERVATION<br />RECORD</div>
       </section>
     </main>
-    <section class="panel" id="panel">
-      <button class="close" id="close">×</button>
-      <h2>Register the material on this bench.</h2>
-      <div class="field">
-        <label>Capsule ID</label><input id="id" value="LANTERN-EDITION-3" />
-      </div>
-      <div class="field">
-        <label>Label</label
-        ><input id="label" value="Lantern Index preservation set" />
-      </div>
-      <div class="field">
-        <label>Origin</label
-        ><input
-          id="origin"
-          value="https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/origin.txt"
-        />
-      </div>
-      <div class="field">
-        <label>Mirror A</label
-        ><input
-          id="a"
-          value="https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-a.txt"
-        />
-      </div>
-      <div class="field">
-        <label>Mirror B</label
-        ><input
-          id="b"
-          value="https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-b.txt"
-        />
-      </div>
-      <div class="field">
-        <label>Preservation policy</label
-        ><input
-          id="policy"
-          value="https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/policy.txt"
-        />
-      </div>
-      <div class="actions">
-        <button class="primary" id="launch">launch</button
-        ><button id="doInspect">inspect</button><button id="doSeal">seal</button
-        ><button id="doRead">read</button>
-      </div>
-    </section>
     <div class="toast" id="toast"></div>
     <script type="module">
       import { createClient } from "https://esm.sh/genlayer-js@1.1.8";
@@ -402,7 +354,31 @@
       const ADDRESS = "0xC8f3D140b023415bf4874DC09553F7Ebc0Ed6f3c",
         ENDPOINT = "https://studio.genlayer.com/api",
         $ = (s) => document.querySelector(s);
-      let client;
+      let client,
+        activeStrip = 0,
+        currentId = "";
+      const sources = [
+        {
+          role: "Origin",
+          value:
+            "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/origin.txt",
+        },
+        {
+          role: "Mirror A",
+          value:
+            "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-a.txt",
+        },
+        {
+          role: "Mirror B",
+          value:
+            "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/mirror-b.txt",
+        },
+        {
+          role: "Preservation policy",
+          value:
+            "https://raw.githubusercontent.com/sanshos1/archive-lifeboat/main/fixtures/policy.txt",
+        },
+      ];
       const toast = (x, sticky = false) => {
           let e = $("#toast");
           e.textContent = x?.message || x;
@@ -447,12 +423,13 @@
         return hash;
       }
       async function read() {
+        if (!currentId) throw Error("Launch a capsule on this bench first.");
         const c =
           client || createClient({ chain: studionet, endpoint: ENDPOINT });
         const x = await c.readContract({
           address: ADDRESS,
           functionName: "get_capsule",
-          args: [$("#id").value.trim()],
+          args: [currentId],
         });
         $("#state").textContent =
           x.state + " / " + (x.verdict || "AWAITING INSPECTION");
@@ -471,44 +448,67 @@
         );
         return x;
       }
-      const open = () => $("#panel").classList.add("open");
-      ["#load", "#inspect", "#seal", "#read"].forEach(
-        (s) => ($(s).onclick = open),
-      );
-      $("#close").onclick = () => $("#panel").classList.remove("open");
+      function showStrip(index) {
+        activeStrip = index;
+        document
+          .querySelectorAll("[data-strip]")
+          .forEach((strip, i) => strip.classList.toggle("active", i === index));
+        $("#editorCount").textContent =
+          `STRIP ${String(index + 1).padStart(2, "0")} / 04`;
+        $("#editorRole").textContent = sources[index].role;
+        $("#sourceUrl").value = sources[index].value;
+        $("#splicer").classList.add("open");
+        $("#loupe").textContent =
+          `Inspecting ${sources[index].role}. Advance the film when the source is correct.`;
+      }
+      function saveActive() {
+        sources[activeStrip].value = $("#sourceUrl").value.trim();
+      }
+      document.querySelectorAll("[data-strip]").forEach((strip) => {
+        strip.onclick = () => showStrip(Number(strip.dataset.strip));
+      });
       $("#connect").onclick = () => connect().catch((e) => toast(e, true));
+      $("#load").onclick = () => showStrip(0);
+      $("#nextStrip").onclick = () => {
+        saveActive();
+        showStrip((activeStrip + 1) % sources.length);
+      };
       $("#launch").onclick = async () => {
         try {
+          saveActive();
+          currentId = `LIFEBOAT-${Date.now().toString().slice(-10)}`;
+          $("#capsuleTag").textContent = currentId + " · FOUR STRIPS ALIGNED";
           await send("launch", [
-            $("#id").value,
-            $("#label").value,
-            $("#origin").value,
-            $("#a").value,
-            $("#b").value,
-            $("#policy").value,
+            currentId,
+            "Conservation bench preservation set",
+            sources[0].value,
+            sources[1].value,
+            sources[2].value,
+            sources[3].value,
           ]);
+          $("#splicer").classList.remove("open");
           await read();
         } catch (e) {
           toast(e, true);
         }
       };
-      $("#doInspect").onclick = async () => {
+      $("#inspect").onclick = async () => {
         try {
-          await send("inspect", [$("#id").value]);
+          await send("inspect", [currentId]);
           await read();
         } catch (e) {
           toast(e, true);
         }
       };
-      $("#doSeal").onclick = async () => {
+      $("#seal").onclick = async () => {
         try {
-          await send("seal", [$("#id").value]);
+          await send("seal", [currentId]);
           await read();
         } catch (e) {
           toast(e, true);
         }
       };
-      $("#doRead").onclick = () => read().catch((e) => toast(e, true));
+      $("#read").onclick = () => read().catch((e) => toast(e, true));
     </script>
   </body>
 </html>
