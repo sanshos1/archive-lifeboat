@@ -1,0 +1,4 @@
+Preservation policy L-3
+Content: retain every entry without alteration.
+Context: retain edition, order, dates, and labels.
+Provenance: name the creator and identify the origin relationship.
