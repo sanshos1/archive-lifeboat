@@ -1,0 +1,9 @@
+{
+  "network": "StudioNet",
+  "contractAddress": "0xC8f3D140b023415bf4874DC09553F7Ebc0Ed6f3c",
+  "deploymentTransaction": "0xa1d962dbfe791b68d7765b8274b3607b2cce9bcf373688796e47f8fc5bd7f4db",
+  "sourceSha256": "a3b311d91374b4e6c32b4e26415aa54c6efb351d1c40db3f83cf9eddb0a97e1e",
+  "sourceCommit": "4ab132839629bc9cace9c4ba5ef80bda9842d011",
+  "repository": "https://github.com/sanshos1/archive-lifeboat",
+  "publicSite": "https://archive-lifeboat.pages.dev/"
+}
